@@ -3,300 +3,831 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마을이음 호스트 모집 | 일손도 얻고, 찐팬도 얻는 새로운 방법</title>
-    <meta name="description" content="인건비 부담 없이, 빈방과 식사 제공만으로 성수기 일손 문제를 해결하세요. 마을이음 호스트 파트너를 모집합니다.">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="마을이음 호스트 모집">
-    <meta property="og:description" content="일손도 얻고, 우리 가게의 '찐팬'도 얻는 새로운 방법">
-    <meta property="og:type" content="website">
-    <meta property="og:url" href="">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <title>마을이음 - 마을과 사람을 잇다</title>
+    <meta name="description" content="일손과 여행이 만나는 새로운 상생 플랫폼 마을이음">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --primary: #FF6B00;
+            --secondary: #2E7D32;
+            --background: #F9F9F9;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border: #E0E0E0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: rgba(255, 107, 0, 0.1);
+        }
+
+        .nav-link.active {
+            color: white;
+            background: var(--primary);
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding-top: 80px;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+            background: white;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .hero-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 800px;
+            margin: 60px auto;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .action-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary);
+        }
+
+        .action-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-card.host .action-icon {
+            background: rgba(255, 107, 0, 0.1);
+            color: var(--primary);
+        }
+
+        .action-card.guest .action-icon {
+            background: rgba(46, 125, 50, 0.1);
+            color: var(--secondary);
+        }
+
+        .action-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .action-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .action-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-card.guest .action-button {
+            background: var(--secondary);
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Stats */
+        .stats-banner {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Host Section Specific */
+        .hero-host {
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.9), rgba(255, 107, 0, 0.7)),
+                        url('https://images.unsplash.com/photo-1580974928016-3bf840c43b55?w=1600') center/cover;
+            color: white;
+            padding: 140px 0 80px;
+            text-align: center;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 60px auto;
+            max-width: 800px;
+        }
+
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--background);
+        }
+
+        .comparison-header div {
+            padding: 20px;
+            font-weight: 700;
+            text-align: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .comparison-header div:last-child {
+            border-right: none;
+        }
+
+        .comparison-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .comparison-item {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .comparison-item:last-child,
+        .comparison-item:nth-last-child(2) {
+            border-bottom: none;
+        }
+
+        .comparison-item:nth-child(even) {
+            border-right: none;
+        }
+
+        .comparison-item.highlight {
+            background: rgba(255, 107, 0, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .process-step {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 15px;
+        }
+
+        /* Guest Section Specific */
+        .hero-guest {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(46, 125, 50, 0.7)),
+                        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600') center/cover;
+            color: white;
+            padding: 140px 0 80px;
+            text-align: center;
+        }
+
+        .program-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .program-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .program-content {
+            padding: 25px;
+        }
+
+        .program-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .program-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .program-tag {
+            display: inline-block;
+            background: rgba(46, 125, 50, 0.1);
+            color: var(--secondary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            padding: 15px;
+            background: rgba(46, 125, 50, 0.1);
+            color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .benefit-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Sections */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 18px 50px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 50px 0 30px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow-sm);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-actions {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .comparison-header,
+            .comparison-body {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-item {
+                border-right: none !important;
+            }
+
+            .process-steps,
+            .program-cards,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="nav-brand">
-                <span class="logo">🏠</span>
-                <span class="brand-name">마을이음</span>
-            </div>
-            <button class="nav-cta" onclick="openModal()">호스트 파트너 무료 사전등록</button>
+            <a href="#/" class="logo">
+                <i data-lucide="home" class="logo-icon"></i>
+                <span>마을이음</span>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i data-lucide="menu"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#/" class="nav-link" data-route="/">홈</a></li>
+                <li><a href="#/host" class="nav-link" data-route="/host">호스트 지원</a></li>
+                <li><a href="#/guest" class="nav-link" data-route="/guest">여행자</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    일손도 얻고,<br>
-                    우리 가게의 '<strong>찐팬</strong>'도 얻는<br>
-                    새로운 방법
-                </h1>
-                <p class="hero-subtitle">
-                    인건비 부담 없이, 빈방과 식사 제공만으로<br>
-                    성수기 일손 문제를 해결하세요.
-                </p>
-                <button class="hero-cta" onclick="openModal()">
-                    호스트 파트너 무료 사전등록
-                </button>
-                <p class="hero-deadline">
-                    🎁 1차 등록 마감: 2026년 2월 28일까지
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pain Point Section -->
-    <section class="pain-point">
-        <div class="container">
-            <h2 class="section-title">
-                사장님, 지금 이런 고민하고 계신가요?
-            </h2>
-            <div class="pain-cards">
-                <div class="pain-card">
-                    <div class="pain-icon">👥</div>
-                    <h3>시기별 일손 부족</h3>
-                    <p>"수확철, 주말에만 딱 필요한데 사람 구하기가 하늘의 별 따기예요."</p>
-                </div>
-                <div class="pain-card">
-                    <div class="pain-icon">💰</div>
-                    <h3>높은 인건비</h3>
-                    <p>"최저임금에 4대 보험까지... 단순 알바 쓰기에 비용이 너무 부담돼요."</p>
-                </div>
-                <div class="pain-card">
-                    <div class="pain-icon">📢</div>
-                    <h3>홍보의 어려움</h3>
-                    <p>"일하기도 바쁜데 마케팅은 엄두도 못 내요."</p>
-                </div>
-                <div class="pain-card">
-                    <div class="pain-icon">🔄</div>
-                    <h3>구인난 악순환</h3>
-                    <p>"도심지가 아니라서 지원자도 없고, 뽑아도 금방 그만둬요."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solution Section -->
-    <section class="solution">
-        <div class="container">
-            <h2 class="section-title">
-                돈이 아닌 '마음'을 나눕니다.<br>
-                서로의 부족함을 채워주는 상생 모델.
-            </h2>
-            
-            <div class="give-take">
-                <div class="give-take-item host">
-                    <h3>호스트(사장님) 제공</h3>
-                    <ul>
-                        <li>🏠 빈방(숙박)</li>
-                        <li>🍚 식사</li>
-                        <li>📍 지역만의 스토리</li>
-                    </ul>
-                </div>
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="container">
+                <h1 class="hero-title">마을과 사람을 잇고<br>함께 가치를 만듭니다</h1>
+                <p class="hero-subtitle">일손과 여행이 만나는 새로운 상생 플랫폼</p>
                 
-                <div class="exchange-icon">⇄</div>
-                
-                <div class="give-take-item traveler">
-                    <h3>여행자(청년) 제공</h3>
-                    <ul>
-                        <li>💪 단기 일손 돕기</li>
-                        <li>📱 SNS 홍보</li>
-                        <li>⚡ 젊은 활력</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <p class="solution-desc">
-                단순 고용이 아닙니다. 여행자는 특별한 경험을 얻고, 사장님은 든든한 일손을 얻습니다.
-            </p>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="benefits">
-        <div class="container">
-            <h2 class="section-title">왜 마을이음인가요?</h2>
-            
-            <div class="benefit-cards">
-                <div class="benefit-card">
-                    <div class="benefit-icon">💸</div>
-                    <h3>현금 지출 최소화!</h3>
-                    <h4>월 약 120만 원 절감</h4>
-                    <div class="cost-comparison">
-                        <table>
-                            <tr>
-                                <th>구분</th>
-                                <th>비용</th>
-                            </tr>
-                            <tr class="normal">
-                                <td>일반 알바</td>
-                                <td>약 160만 원</td>
-                            </tr>
-                            <tr class="highlight">
-                                <td>마을이음</td>
-                                <td>실비 20~40만 원</td>
-                            </tr>
-                        </table>
+                <div class="hero-actions">
+                    <div class="action-card host" onclick="navigate('/host')">
+                        <div class="action-icon">
+                            <i data-lucide="store"></i>
+                        </div>
+                        <h3 class="action-title">사업자라면</h3>
+                        <p class="action-description">일손이 필요한 사장님을 위한 솔루션</p>
+                        <button class="action-button">호스트 지원하기</button>
                     </div>
-                    <ul class="benefit-points">
-                        <li>✅ 4대 보험 부담 ZERO</li>
-                        <li>✅ 구인 플랫폼 수수료 절감</li>
-                    </ul>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">📱</div>
-                    <h3>단순 알바가 아닌,<br>우리 가게 홍보대사</h3>
-                    <div class="stats">
-                        <div class="stat">
-                            <span class="number">70%</span>
-                            <span class="label">SNS 후기 작성률</span>
+                    
+                    <div class="action-card guest" onclick="navigate('/guest')">
+                        <div class="action-icon">
+                            <i data-lucide="map-pin"></i>
                         </div>
-                        <div class="stat">
-                            <span class="number">40%+</span>
-                            <span class="label">지역 재방문율<br>(일반 관광객 대비 2배)</span>
-                        </div>
+                        <h3 class="action-title">여행자라면</h3>
+                        <p class="action-description">의미있는 여행을 원하는 청년들을 위한 기회</p>
+                        <button class="action-button">프로그램 찾기</button>
                     </div>
-                    <blockquote class="testimonial">
-                        "대학생들이 와서 수확도 돕고 SNS에 올려줘서 주문이 3배나 늘었어요."
-                        <cite>- 강원도 농가 A씨</cite>
-                    </blockquote>
                 </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">📅</div>
-                    <h3>유연한 인력 운용</h3>
-                    <h4>딱 필요할 때만 부르세요</h4>
-                    <div class="use-cases">
-                        <div class="use-case">
-                            <span class="icon">🌾</span>
-                            <div>
-                                <strong>농가</strong>
-                                <p>수확철/농번기 집중 투입</p>
-                            </div>
-                        </div>
-                        <div class="use-case">
-                            <span class="icon">☕</span>
-                            <div>
-                                <strong>카페/식당</strong>
-                                <p>주말/피크타임 서빙 및 정리</p>
-                            </div>
-                        </div>
-                        <div class="use-case">
-                            <span class="icon">🏡</span>
-                            <div>
-                                <strong>펜션/민박</strong>
-                                <p>성수기 객실 청소/바비큐 준비</p>
-                            </div>
-                        </div>
+            </div>
+        </div>
+        
+        <div class="stats-banner">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">1,250+</div>
+                        <div class="stat-label">참여자</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">106+</div>
+                        <div class="stat-label">파트너 지역</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Objection Section -->
-    <section class="objection">
-        <div class="container">
-            <h2 class="section-title">빈방이 없으신가요? 걱정 마세요!</h2>
-            <p class="objection-desc">
-                마을이음이 지역 내 유휴 공간을 연결해 드립니다.
-            </p>
-            <div class="network-options">
-                <div class="network-option">마을회관</div>
-                <div class="network-option">이웃 농가 빈방</div>
-                <div class="network-option">지자체 숙소</div>
-                <div class="network-option">제휴 모텔/펜션</div>
+    <!-- Host Section -->
+    <section id="host" class="section">
+        <div class="hero hero-host">
+            <div class="container">
+                <h1 class="hero-title">비어있는 방으로<br>일손 문제를 해결하세요</h1>
+                <p class="hero-subtitle">인건비 부담 없이, 숙식 제공만으로 든든한 일손을 만나보세요</p>
             </div>
-            <p class="objection-message">
-                <strong>사장님은 편안하게 일손만 받으세요. 숙소 매칭은 저희가 합니다.</strong>
-            </p>
         </div>
-    </section>
-
-    <!-- Process Section -->
-    <section class="process">
+        
         <div class="container">
-            <h2 class="section-title">이용 프로세스</h2>
+            <h2 style="text-align: center; font-size: 2rem; margin: 60px 0 30px;">비용 비교</h2>
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div>일반 아르바이트</div>
+                    <div>마을이음</div>
+                </div>
+                <div class="comparison-body">
+                    <div class="comparison-item">월 160만원</div>
+                    <div class="comparison-item highlight">월 20~40만원 (실비)</div>
+                    <div class="comparison-item">4대 보험 포함</div>
+                    <div class="comparison-item highlight">4대 보험 불필요</div>
+                    <div class="comparison-item">구인 플랫폼 수수료</div>
+                    <div class="comparison-item highlight">플랫폼 수수료 무료</div>
+                </div>
+            </div>
+            
+            <h2 style="text-align: center; font-size: 2rem; margin: 60px 0 30px;">이용 절차</h2>
             <div class="process-steps">
                 <div class="process-step">
                     <div class="step-number">1</div>
                     <h3>호스트 등록</h3>
-                    <p>업종, 위치, 제공 가능 숙식 입력</p>
+                    <p>업종과 제공 가능한 숙식 정보 입력</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">2</div>
-                    <h3>공고 게시</h3>
-                    <p>필요한 기간, 업무 내용 등록</p>
+                    <h3>일손 매칭</h3>
+                    <p>프로필 확인 후 맞는 여행자 선택</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">3</div>
-                    <h3>지원자 선택</h3>
-                    <p>프로필 확인 후 우리 가게에 딱 맞는 사람 선택</p>
+                    <h3>함께 일하기</h3>
+                    <p>일손 도움과 지역 경험 공유</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">4</div>
-                    <h3>함께 일하기</h3>
-                    <p>일손 도움 받고 지역 매력 나누기</p>
+                    <h3>활기 창출</h3>
+                    <p>SNS 홍보와 젊은 활력 얻기</p>
                 </div>
+            </div>
+            
+            <div class="cta-section">
+                <h2 class="cta-title">지금 바로 호스트로 등록하세요</h2>
+                <p class="cta-subtitle">선착순 50명, 특별 혜택 제공</p>
+                <button class="cta-button">무료 상담 신청하기</button>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
+    <!-- Guest Section -->
+    <section id="guest" class="section">
+        <div class="hero hero-guest">
+            <div class="container">
+                <h1 class="hero-title">깊이 여행하며<br>지역과 함께 성장하세요</h1>
+                <p class="hero-subtitle">단순 관광이 아닌, 살아있는 경험을 선물합니다</p>
+            </div>
+        </div>
+        
         <div class="container">
-            <h2 class="section-title">이런 분들께 강력 추천합니다!</h2>
-            <div class="checklist">
-                <div class="checklist-item">
-                    <span class="check-icon">✅</span>
-                    <p>특정 시기에만 일손이 급하게 필요하신 분</p>
+            <h2 style="text-align: center; font-size: 2rem; margin: 60px 0 30px;">프로그램 카테고리</h2>
+            <div class="program-cards">
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1592982183983-56d0a5de25c6?w=400" alt="농촌 체험" class="program-image">
+                    <div class="program-content">
+                        <h3 class="program-title">농촌 체험</h3>
+                        <p class="program-description">수확 체험, 농사 돕기, 지역 특산물 만들기</p>
+                        <div>
+                            <span class="program-tag">농가</span>
+                            <span class="program-tag">수확</span>
+                            <span class="program-tag">자연</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="checklist-item">
-                    <span class="check-icon">✅</span>
-                    <p>인건비 지출을 줄이고 싶으신 분</p>
+                
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400" alt="문화 예술" class="program-image">
+                    <div class="program-content">
+                        <h3 class="program-title">문화 예술</h3>
+                        <p class="program-description">벽화 그리기, 지역 축제 기획, 문화 활동</p>
+                        <div>
+                            <span class="program-tag">예술</span>
+                            <span class="program-tag">축제</span>
+                            <span class="program-tag">창작</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="checklist-item">
-                    <span class="check-icon">✅</span>
-                    <p>광고비 없이 가게를 홍보하고 싶으신 분</p>
-                </div>
-                <div class="checklist-item">
-                    <span class="check-icon">✅</span>
-                    <p>청년들과 소통하며 활력을 얻고 싶으신 분</p>
+                
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400" alt="숙소 도우미" class="program-image">
+                    <div class="program-content">
+                        <h3 class="program-title">숙소 도우미</h3>
+                        <p class="program-description">펜션 청소, 바비큐 준비, 객실 관리</p>
+                        <div>
+                            <span class="program-tag">펜션</span>
+                            <span class="program-tag">서비스</span>
+                            <span class="program-tag">성수기</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="early-bird">
-                <h3>🎁 얼리버드 혜택 (선착순 50명)</h3>
-                <div class="benefits-list">
-                    <div class="early-benefit">🎁 플랫폼 수수료 3개월 100% 면제</div>
-                    <div class="early-benefit">🎁 앱 메인 '이달의 호스트' 우선 노출</div>
-                    <div class="early-benefit">🎁 전문 포토그래퍼 홍보 사진 촬영 지원</div>
+            <h2 style="text-align: center; font-size: 2rem; margin: 60px 0 30px;">참여 혜택</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <h3 class="benefit-title">무료 숙식 제공</h3>
+                    <p class="benefit-description">여행 경비 절감, 안전한 숙소 보장</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i data-lucide="award"></i>
+                    </div>
+                    <h3 class="benefit-title">활동 증명서</h3>
+                    <p class="benefit-description">공식 활동 증명서 발급</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i data-lucide="gift"></i>
+                    </div>
+                    <h3 class="benefit-title">지역 특산물</h3>
+                    <p class="benefit-description">감사의 의미로 지역 특산물 증정</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3 class="benefit-title">네트워킹</h3>
+                    <p class="benefit-description">지역 주민과 다른 여행자와의 교류</p>
                 </div>
             </div>
             
-            <button class="main-cta" onclick="openModal()">
-                지금 바로 상담 신청하기
-            </button>
-            <p class="deadline">
-                <strong>1차 등록 마감: 2026년 2월 28일까지</strong>
-            </p>
-            <p class="contact">
-                문의: 010-9430-8852 / limpz501000@gmail.com
-            </p>
+            <div class="cta-section">
+                <h2 class="cta-title">특별한 여행을 떠나볼까요?</h2>
+                <p class="cta-subtitle">지금 바로 맞춤 프로그램을 찾아보세요</p>
+                <button class="cta-button">프로그램 찾기</button>
+            </div>
         </div>
     </section>
 
@@ -304,61 +835,164 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo">🏠</span>
-                    <span class="brand-name">마을이음</span>
+                <div class="footer-section">
+                    <h3>마을이음</h3>
+                    <p>일손과 여행이 만나는 새로운 상생 플랫폼으로 지역의 활기를 되살립니다.</p>
                 </div>
-                <div class="footer-info">
-                    <p>함께 만들어가는 지역 상생 플랫폼</p>
-                    <p>© 2026 마을이음. All rights reserved.</p>
+                <div class="footer-section">
+                    <h3>빠른 링크</h3>
+                    <ul class="footer-links">
+                        <li><a href="#/">홈</a></li>
+                        <li><a href="#/host">호스트 지원</a></li>
+                        <li><a href="#/guest">여행자</a></li>
+                    </ul>
                 </div>
-                <div class="footer-contact">
-                    <p>📞 010-9430-8852</p>
-                    <p>📧 limpz501000@gmail.com</p>
+                <div class="footer-section">
+                    <h3>문의하기</h3>
+                    <ul class="footer-links">
+                        <li>📞 010-9430-8852</li>
+                        <li>📧 limpz501000@gmail.com</li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                    </ul>
                 </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 마을이음. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3>호스트 파트너 상담 신청</h3>
-            <form id="consultation-form">
-                <div class="form-group">
-                    <label for="name">이름 *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="contact">연락처 *</label>
-                    <input type="tel" id="contact" name="contact" required>
-                </div>
-                <div class="form-group">
-                    <label for="business">업종 *</label>
-                    <select id="business" name="business" required>
-                        <option value="">선택해주세요</option>
-                        <option value="farm">농가</option>
-                        <option value="cafe">카페</option>
-                        <option value="restaurant">식당</option>
-                        <option value="pension">펜션/민박</option>
-                        <option value="other">기타</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="location">지역 *</label>
-                    <input type="text" id="location" name="location" placeholder="예: 강원도 평창" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">문의사항</label>
-                    <textarea id="message" name="message" rows="3"></textarea>
-                </div>
-                <button type="submit" class="submit-btn">상담 신청하기</button>
-            </form>
-        </div>
-    </div>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
 
-    <!-- JavaScript -->
-    <script src="js/main.js"></script>
+        // Routing System
+        class Router {
+            constructor() {
+                this.routes = {
+                    '/': 'home',
+                    '/host': 'host',
+                    '/guest': 'guest'
+                };
+                this.init();
+            }
+
+            init() {
+                // Handle initial load
+                this.handleRoute();
+                
+                // Listen for hash changes
+                window.addEventListener('hashchange', () => this.handleRoute());
+                
+                // Handle navigation clicks
+                document.addEventListener('click', (e) => {
+                    if (e.target.matches('[data-route]') || e.target.closest('[data-route]')) {
+                        const link = e.target.matches('[data-route]') ? e.target : e.target.closest('[data-route]');
+                        e.preventDefault();
+                        this.navigate(link.dataset.route);
+                    }
+                });
+            }
+
+            handleRoute() {
+                const hash = window.location.hash || '#/';
+                const path = hash.substring(1); // Remove #
+                const sectionId = this.routes[path] || 'home';
+                
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show current section
+                const currentSection = document.getElementById(sectionId);
+                if (currentSection) {
+                    currentSection.classList.add('active');
+                }
+                
+                // Update navigation active state
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.route === path) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            navigate(path) {
+                window.location.hash = path;
+            }
+        }
+
+        // Initialize router
+        const router = new Router();
+
+        // Global navigation function
+        function navigate(path) {
+            router.navigate(path);
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.querySelector('.nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Smooth scroll for anchor links
+        document.addEventListener('DOMContentLoaded', () => {
+            // Re-initialize icons after content is loaded
+            setTimeout(() => lucide.createIcons(), 100);
+            
+            // Add hover effects
+            const cards = document.querySelectorAll('.action-card, .program-card, .benefit-item');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add intersection observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            const animatedElements = document.querySelectorAll('.process-step, .benefit-item, .program-card');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(element);
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const menu = document.querySelector('.nav-menu');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
