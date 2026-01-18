@@ -24,6 +24,8 @@
             --border: #E0E0E0;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --gradient-primary: linear-gradient(135deg, #2E7D32, #4CAF50);
+            --gradient-secondary: linear-gradient(135deg, #FF6B00, #FF9800);
         }
 
         * {
@@ -51,10 +53,11 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(46, 125, 50, 0.1);
         }
 
         .navbar .container {
@@ -107,7 +110,8 @@
 
         .nav-link.active {
             color: white;
-            background: var(--primary);
+            background: var(--gradient-primary);
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
         }
 
         /* Sections */
@@ -129,26 +133,42 @@
 
         /* Hero Section */
         .hero {
-            padding: 100px 0 60px;
+            padding: 120px 0 80px;
             text-align: center;
-            background: white;
+            background: var(--gradient-primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>') repeat;
+            opacity: 0.3;
         }
 
         .hero-title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             line-height: 1.2;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 50px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-actions {
@@ -160,20 +180,39 @@
         }
 
         .action-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 50px 40px;
             text-align: center;
-            box-shadow: var(--shadow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .action-card:hover::before {
+            left: 100%;
         }
 
         .action-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-color: var(--primary);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .action-icon {
@@ -230,11 +269,29 @@
 
         /* Stats */
         .stats-banner {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient-secondary);
             color: white;
-            padding: 60px 0;
+            padding: 80px 0;
             text-align: center;
-            margin-top: 80px;
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(50px); }
         }
 
         .stats-grid {
@@ -250,9 +307,16 @@
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .stat-label {
@@ -373,16 +437,34 @@
 
         .program-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
             cursor: pointer;
+            position: relative;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .program-card:hover::before {
+            transform: scaleX(1);
         }
 
         .program-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
 
         .program-image {
@@ -428,10 +510,18 @@
 
         .benefit-item {
             text-align: center;
-            padding: 30px;
+            padding: 40px 30px;
             background: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow-sm);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .benefit-icon {
@@ -459,11 +549,25 @@
 
         /* CTA Sections */
         .cta-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient-primary);
             color: white;
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
-            margin: 80px 0;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.08)"/><circle cx="50" cy="80" r="2.5" fill="rgba(255,255,255,0.12)"/></svg>');
+            background-size: 200px 200px;
+            animation: float 30s ease-in-out infinite;
         }
 
         .cta-title {
@@ -482,25 +586,174 @@
             background: white;
             color: var(--primary);
             border: none;
-            padding: 18px 50px;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            padding: 20px 60px;
+            border-radius: 50px;
+            font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(46, 125, 50, 0.1);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Partners Section */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .partner-region {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-region::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: center;
+        }
+
+        .partner-region:hover::before {
+            transform: scaleX(1);
+        }
+
+        .partner-region:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .region-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .region-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .region-features li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .region-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* FAQ Section */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px 25px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 25px;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 0 25px 20px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            line-height: 1.7;
         }
 
         /* Footer */
         .footer {
             background: var(--text-primary);
             color: white;
-            padding: 50px 0 30px;
+            padding: 60px 0 30px;
             margin-top: 100px;
         }
 
@@ -640,16 +893,16 @@
     <section id="home" class="section active">
         <div class="hero">
             <div class="container">
-                <h1 class="hero-title">마을과 사람을 잇고<br>함께 가치를 만듭니다</h1>
-                <p class="hero-subtitle">일손과 여행이 만나는 새로운 상생 플랫폼</p>
+                <h1 class="hero-title">지역과 함께 성장하는<br>특별한 여행</h1>
+                <p class="hero-subtitle">단순한 관광이 아닌, 지역민과 교류하며 문화에 깊이 잠기는 체험형 관계 맺기 여행</p>
                 
                 <div class="hero-actions">
                     <div class="action-card host" onclick="navigate('/host')">
                         <div class="action-icon">
-                            <i data-lucide="store"></i>
+                            <i data-lucide="home"></i>
                         </div>
                         <h3 class="action-title">사업자라면</h3>
-                        <p class="action-description">일손이 필요한 사장님을 위한 솔루션</p>
+                        <p class="action-description">일손이 필요한 지역 사장님을 위한 상생 솔루션</p>
                         <button class="action-button">호스트 지원하기</button>
                     </div>
                     
@@ -658,7 +911,7 @@
                             <i data-lucide="map-pin"></i>
                         </div>
                         <h3 class="action-title">여행자라면</h3>
-                        <p class="action-description">의미있는 여행을 원하는 청년들을 위한 기회</p>
+                        <p class="action-description">의미 있는 여행을 원하는 청년들을 위한 특별한 기회</p>
                         <button class="action-button">프로그램 찾기</button>
                     </div>
                 </div>
@@ -670,11 +923,15 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <div class="stat-number">1,250+</div>
-                        <div class="stat-label">참여자</div>
+                        <div class="stat-label">누적 참여자</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">106+</div>
                         <div class="stat-label">파트너 지역</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">228</div>
+                        <div class="stat-label">소멸 위기 지역</div>
                     </div>
                 </div>
             </div>
@@ -831,20 +1088,129 @@
         </div>
     </section>
 
+    <!-- Partners Section -->
+    <section id="partners" class="section">
+        <div class="container">
+            <h2 class="section-title">함께하는 지역 파트너</h2>
+            <div class="partners-grid">
+                <div class="partner-region">
+                    <div class="region-icon">🏔️</div>
+                    <h3>강원도</h3>
+                    <p>홍천, 평창, 정선</p>
+                    <ul class="region-features">
+                        <li>청정 자연환경</li>
+                        <li>전통 산촌문화</li>
+                        <li>농산물 체험</li>
+                    </ul>
+                </div>
+                
+                <div class="partner-region">
+                    <div class="region-icon">🏖️</div>
+                    <h3>전남 해안</h3>
+                    <p>고흥, 완도, 신안</p>
+                    <ul class="region-features">
+                        <li>풍부한 해양자원</li>
+                        <li>어촌 문화 체험</li>
+                        <li>수산물 가공</li>
+                    </ul>
+                </div>
+                
+                <div class="partner-region">
+                    <div class="region-icon">🏛️</div>
+                    <h3>경북 전통마을</h3>
+                    <p>안동, 영주, 경주</p>
+                    <ul class="region-features">
+                        <li>유네스코 문화유산</li>
+                        <li>고택 한옥 체험</li>
+                        <li>전통문화 학습</li>
+                    </ul>
+                </div>
+                
+                <div class="partner-region">
+                    <div class="region-icon">🌾</div>
+                    <h3>충남 농촌</h3>
+                    <p>부여, 서천, 청양</p>
+                    <ul class="region-features">
+                        <li>비옥한 평야</li>
+                        <li>유기농업 체험</li>
+                        <li>전통 장 담그기</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <h2 class="section-title">자주 묻는 질문</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>참가 비용은 얼마인가요?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>프로그램과 기간에 따라 다르지만, 1박 2일 기준 50,000원부터 시작합니다. 숙박, 식사, 체험 활동비가 모두 포함된 금액이며, 교통비는 별도입니다. 가족 단위 참가 시 할인 혜택이 제공됩니다.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>혼자 참가해도 괜찮나요?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>물론입니다! 참가자의 약 40%가 혼자 참여하며, 프로그램 진행 중 자연스럽게 다른 참가자들과 친해질 수 있는 활동들이 준비되어 있습니다. 걱정하지 마시고 편하게 참여하세요.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>어떤 준비물이 필요한가요?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>편한 활동복, 운동화, 개인 세면도구, 상비약 정도면 충분합니다. 농촌 체험의 경우 작업복이 제공되며, 계절에 따라 추가로 필요한 물품은 신청 확정 후 개별 안내해드립니다.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>체력이 약한데 참여할 수 있나요?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>프로그램은 강도별로 구분되어 있어 자신의 체력에 맞게 선택할 수 있습니다. 또한 활동 중 충분한 휴식 시간이 제공되며, 무리한 활동을 강요하지 않습니다. 건강상 특이사항이 있다면 사전에 말씀해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>마을이음</h3>
-                    <p>일손과 여행이 만나는 새로운 상생 플랫폼으로 지역의 활기를 되살립니다.</p>
+                    <p>지역과 함께 성장하고 특별한 경험을 나누는 체험형 관계 맺기 여행</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                        <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h3>빠른 링크</h3>
                     <ul class="footer-links">
-                        <li><a href="#/">홈</a></li>
-                        <li><a href="#/host">호스트 지원</a></li>
-                        <li><a href="#/guest">여행자</a></li>
+                <li><a href="#/" class="nav-link" data-route="/">홈</a></li>
+                <li><a href="#/host" class="nav-link" data-route="/host">호스트 지원</a></li>
+                <li><a href="#/guest" class="nav-link" data-route="/guest">여행자</a></li>
+                <li><a href="#/partners" class="nav-link" data-route="/partners">파트너</a></li>
+                <li><a href="#/faq" class="nav-link" data-route="/faq">FAQ</a></li>
+                        <li><a href="#partners">파트너 지역</a></li>
+                        <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -852,13 +1218,13 @@
                     <ul class="footer-links">
                         <li>📞 010-9430-8852</li>
                         <li>📧 limpz501000@gmail.com</li>
-                        <li><a href="#">이용약관</a></li>
-                        <li><a href="#">개인정보처리방침</a></li>
+                        <li>🏠 서울시 강남구 테헤란로 123</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 마을이음. All rights reserved.</p>
+                <p><a href="#">이용약관</a> | <a href="#">개인정보처리방침</a></p>
             </div>
         </div>
     </footer>
@@ -870,11 +1236,13 @@
         // Routing System
         class Router {
             constructor() {
-                this.routes = {
-                    '/': 'home',
-                    '/host': 'host',
-                    '/guest': 'guest'
-                };
+        this.routes = {
+            '/': 'home',
+            '/host': 'host',
+            '/guest': 'guest',
+            '/partners': 'partners',
+            '/faq': 'faq'
+        };
                 this.init();
             }
 
@@ -940,6 +1308,26 @@
         function toggleMobileMenu() {
             const menu = document.querySelector('.nav-menu');
             menu.classList.toggle('active');
+        }
+
+        // FAQ toggle
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelectorAll('.faq-question').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                answer.classList.add('active');
+                element.classList.add('active');
+            }
         }
 
         // Smooth scroll for anchor links
