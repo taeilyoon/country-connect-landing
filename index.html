@@ -70,19 +70,11 @@
         .logo {
             display: flex;
             align-items: center;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary);
             text-decoration: none;
             transition: all 0.3s ease;
-            padding: 8px 16px;
-            border-radius: 12px;
-        }
-
-        .logo:hover {
-            background: rgba(46, 125, 50, 0.1);
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.15);
         }
 
         .logo-icon {
@@ -95,6 +87,19 @@
             display: flex;
             gap: 30px;
             list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: var(--shadow);
         }
 
         .nav-link {
@@ -107,18 +112,34 @@
             cursor: pointer;
         }
 
-        .nav-link:hover:not(.active) {
-            color: var(--primary);
-            background: rgba(46, 125, 50, 0.08);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1);
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
         }
 
-        .nav-link.active {
-            color: white;
-            background: var(--gradient-primary);
-            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
-            transform: translateY(-1px);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
         }
 
         /* Sections */
@@ -659,16 +680,21 @@
             font-weight: 700;
         }
 
-        /* FAQ Section */
+        /* Local Host FAQ Section */
+        .local-faq {
+            max-width: 900px;
+            margin: 60px auto;
+        }
+
         .faq-list {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .faq-item {
             background: white;
             margin-bottom: 20px;
-            border-radius: 15px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
@@ -681,8 +707,8 @@
         .faq-question {
             width: 100%;
             padding: 20px 25px;
-            background: none;
-            border: none;
+            background: rgba(46, 125, 50, 0.05);
+            border: 1px solid var(--border);
             text-align: left;
             font-size: 1.1rem;
             font-weight: 600;
@@ -695,7 +721,8 @@
         }
 
         .faq-question:hover {
-            color: var(--primary);
+            background: rgba(46, 125, 50, 0.1);
+            border-color: var(--primary);
         }
 
         .faq-question i {
@@ -727,8 +754,8 @@
         .footer {
             background: var(--text-primary);
             color: white;
-            padding: 60px 0 30px;
-            margin-top: 100px;
+            padding: 60px 0 40px;
+            margin-top: 80px;
         }
 
         .footer-content {
@@ -776,6 +803,8 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-primary);
+            padding: 8px;
+            border-radius: 8px;
         }
 
         /* Responsive */
@@ -855,10 +884,12 @@
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
                 <i data-lucide="menu"></i>
             </button>
-            <ul class="nav-menu">
+        <ul class="nav-menu">
                 <li><a href="#/" class="nav-link" data-route="/">홈</a></li>
                 <li><a href="#/host" class="nav-link" data-route="/host">호스트 지원</a></li>
                 <li><a href="#/guest" class="nav-link" data-route="/guest">여행자</a></li>
+                <li><a href="#/local" class="nav-link" data-route="/local">현지 파트너</a></li>
+                <li><a href="#/faq" class="nav-link" data-route="/faq">FAQ</a></li>
             </ul>
         </div>
     </nav>
@@ -970,28 +1001,83 @@
         </div>
     </section>
 
-    <!-- Guest Section -->
-    <section id="guest" class="section">
-        <div class="hero hero-guest">
+    <!-- Local Host Section -->
+    <section id="local" class="section">
+        <div class="hero">
             <div class="container">
-                <h1 class="hero-title">깊이 여행하며<br>지역과 함께 성장하세요</h1>
-                <p class="hero-subtitle">단순 관광이 아닌, 살아있는 경험을 선물합니다</p>
+                <h1 class="hero-title">우리 지역의<br>특별한 숙소를 소개합니다</h1>
+                <p class="hero-subtitle">호스트 파트너로 더 넓은 커뮤니티를 경험하세요</p>
             </div>
+        </div>
         </div>
         
         <div class="container">
             <h2 style="text-align: center; font-size: 2rem; margin: 60px 0 30px;">프로그램 카테고리</h2>
-            <div class="program-cards">
-                <div class="program-card">
-                    <img src="https://images.unsplash.com/photo-1592982183983-56d0a5de25c6?w=400" alt="농촌 체험" class="program-image">
-                    <div class="program-content">
-                        <h3 class="program-title">농촌 체험</h3>
-                        <p class="program-description">수확 체험, 농사 돕기, 지역 특산물 만들기</p>
-                        <div>
-                            <span class="program-tag">농가</span>
-                            <span class="program-tag">수확</span>
-                            <span class="program-tag">자연</span>
+    <!-- Local Host Features -->
+    <div class="local-features">
+        <div class="container">
+            <h2 class="section-title">현지 호스트 혜택</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <h3>새로운 고객 유치</h3>
+                    <p>여행객 유치율이 개선되고 신규 고객이 찾아옵니다.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="star"></i>
+                    </div>
+                    <h3>후기 관리 용이</h3>
+                    <p>에어뷰객 시스템으로 쉽게 예약하고 관리하세요.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h3>마케팅 자동화</h3>
+                    <p>SNS 연동, 후기 관리를 자동으로 도와줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Local Host Testimonials -->
+    <div class="local-testimonials">
+        <div class="container">
+            <h2 class="section-title">지역 호스트 후기</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <span class="avatar-text">A</span>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"신규 호스트들 덕분에 예약량이 3배나 늘었어요. 오토켓비 때문에 예약이 쉽워지 않았던 고객들도 예약해주네요."</p>
+                        <div class="testimonial-info">
+                            <span class="name">- 강원도 O 펜션</span>
+                            <span class="role">운영 5년</span>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <span class="avatar-text">B</span>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"외지인들이 우리 가게에 머물러다가는 것을 좋아해요. 오�럼처럼 자연스러운 분위기가 매력적입니다."</p>
+                        <div class="testimonial-info">
+                            <span class="name">- 전라북 한옥마을</span>
+                            <span class="role">전통문화 체험</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                     </div>
                 </div>
                 
@@ -1023,11 +1109,37 @@
             </div>
             
             <h2 style="text-align: center; font-size: 2rem; margin: 60px 0 30px;">참여 혜택</h2>
-            <div class="benefits-grid">
+        <div class="benefits-grid">
                 <div class="benefit-item">
                     <div class="benefit-icon">
-                        <i data-lucide="home"></i>
+                        <i data-lucide="shield-check"></i>
                     </div>
+                    <h3 class="benefit-title">검증된 숙소 제공</h3>
+                    <p class="benefit-description">안전하고 편리한 숙소를 제공하여 외지인인 걱정 없이</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i data-lucide="bell"></i>
+                    </div>
+                    <h3 class="benefit-title">후기 관리 시스템</h3>
+                    <p class="benefit-description">전문화 예약, 리뷰, 실시간 예약 관리</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i data-lucide="tag"></i>
+                    </div>
+                    <h3 class="benefit-title">마케팅 노출 기회</h3>
+                    <p class="benefit-description">지역 홍보를 위한 SNS 연동 지원</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i data-lucide="heart"></i>
+                    </div>
+                    <h3 class="benefit-title">로컬 커뮤니티</h3>
+                    <p class="benefit-description">고객 데이터 분석과 개인화된 마케팅 전략</p>
+                </div>
+            </div>
+        </div>
                     <h3 class="benefit-title">무료 숙식 제공</h3>
                     <p class="benefit-description">여행 경비 절감, 안전한 숙소 보장</p>
                 </div>
@@ -1037,28 +1149,47 @@
                     </div>
                     <h3 class="benefit-title">활동 증명서</h3>
                     <p class="benefit-description">공식 활동 증명서 발급</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i data-lucide="gift"></i>
+    </div>
+
+    <!-- Local Host FAQ Section -->
+    <section id="local-faq" class="section">
+        <div class="container">
+            <h2 class="section-title">현지 호스트 FAQ</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleLocalFAQ(this)">
+                        <span>숙소/시설 제공</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>현지 호스트는 제공된 숙소나 시설에 체류받을 제공하는 것만으로 충분합니다.</p>
                     </div>
-                    <h3 class="benefit-title">지역 특산물</h3>
-                    <p class="benefit-description">감사의 의미로 지역 특산물 증정</p>
                 </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i data-lucide="users"></i>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleLocalFAQ(this)">
+                        <span>예약 관리</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                        <p>후기 관리는 객실 청소, 세탁 처리, 공간 관리 등의 모든 업무를 책임지고 있습니다. 호스트는 직접 운영에만 집중하고, 마을이음이 투숙객과 기술 지원을 제공합니다. <strong>마을이음 플랫폼으로 연동되어 있습니다.</strong></p>
+                        <ul class="benefits-list">
+                            <li>✅ 자동 예약 알림</li>
+                            <li>✅ 실시간 예약 현황</li>
+                            <li>✅ 취소/변경 자동 처리</li>
+                            <li>✅ 고객 정보 수집</li>
+                        </ul>
                     </div>
-                    <h3 class="benefit-title">네트워킹</h3>
-                    <p class="benefit-description">지역 주민과 다른 여행자와의 교류</p>
                 </div>
-            </div>
-            
-            <div class="cta-section">
-                <h2 class="cta-title">특별한 여행을 떠나볼까요?</h2>
-                <p class="cta-subtitle">지금 바로 맞춤 프로그램을 찾아보세요</p>
-                <button class="cta-button">프로그램 찾기</button>
-            </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleLocalFAQ(this)">
+                        <span>후기 관리</span>
+                        <i data-lucide="chevron-doen"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>마을이음 후기 관리 시스템을 통해 리뷰, 객실 청소, 세탁 처리 등을 쉽게 처리해 드립니다.</p>
+                    </div>
+                </div>
         </div>
     </section>
 
@@ -1148,16 +1279,6 @@
                         <p>편한 활동복, 운동화, 개인 세면도구, 상비약 정도면 충분합니다. 농촌 체험의 경우 작업복이 제공되며, 계절에 따라 추가로 필요한 물품은 신청 확정 후 개별 안내해드립니다.</p>
                     </div>
                 </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFAQ(this)">
-                        <span>체력이 약한데 참여할 수 있나요?</span>
-                        <i data-lucide="chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>프로그램은 강도별로 구분되어 있어 자신의 체력에 맞게 선택할 수 있습니다. 또한 활동 중 충분한 휴식 시간이 제공되며, 무리한 활동을 강요하지 않습니다. 건강상 특이사항이 있다면 사전에 말씀해주세요.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -1214,7 +1335,7 @@
             '/': 'home',
             '/host': 'host',
             '/guest': 'guest',
-            '/partners': 'partners',
+            '/local': 'local',
             '/faq': 'faq'
         };
                 this.init();
