@@ -30,12 +30,87 @@
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="page-hero traveler-hero">
             <div class="hero-panel">
-                <h2 class="hero-title">여행형 참여</h2>
-                <p class="hero-subtitle">떠나요, 일손이 필요한 당신만의 마을로.<br>단순한 여행을 넘어 마을의 일원이 되는 며칠간의 여정.</p>
-                <div class="hero-actions">
-                    <button class="btn btn-primary">신청하기</button>
+                <h2 class="hero-title animate-fade-up">여행형 참여</h2>
+                <p class="hero-subtitle animate-fade-up" style="animation-delay: 0.1s;">떠나요, 일손이 필요한 당신만의 마을로.<br>단순한
+                    여행을 넘어 마을의 일원이 되는 며칠간의 여정.</p>
+                <div class="hero-actions animate-fade-up" style="animation-delay: 0.2s;">
+                    <a href="#activities" class="btn btn-primary btn-lg">활동 둘러보기</a>
+                </div>
+            </div>
+            <a href="#activities" class="scroll-indicator">
+                <span class="scroll-text">활동 보기</span>
+                <div class="scroll-arrow"></div>
+            </a>
+        </section>
+
+        <!-- Sample Activities Section -->
+        <section id="activities" class="activity-section">
+            <div class="container">
+                <h2 class="section-title reveal">지금 바로 참여 가능한 활동</h2>
+
+                <div class="activity-grid reveal-stagger">
+                    <!-- Activity 1 -->
+                    <div class="activity-card reveal">
+                        <div class="activity-image"
+                            style="background-image: url('https://images.unsplash.com/photo-1594916801990-256be4727192?q=80&w=600');">
+                            <div class="activity-tags">
+                                <span class="tag">수확</span>
+                                <span class="tag">식사제공</span>
+                            </div>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-location">📍 경북 청송군</div>
+                            <h3>청송 꿀사과 수확 및 선별 보조</h3>
+                            <p>가을 수확철을 맞아 부족한 일손을 돕고, 직접 수확한 사과로 잼을 만드는 경험을 해보세요.</p>
+                            <div class="activity-info">
+                                <span class="activity-duration">🗓️ 3박 4일</span>
+                                <span class="activity-benefit">🏠 숙소 무료 제공</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="activity-card reveal">
+                        <div class="activity-image"
+                            style="background-image: url('https://images.unsplash.com/photo-1541480601022-2308c0f02487?q=80&w=600');">
+                            <div class="activity-tags">
+                                <span class="tag">예술</span>
+                                <span class="tag">환경개선</span>
+                            </div>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-location">📍 경남 남해군</div>
+                            <h3>다랭이마을 벽화 그리기 & 환경 정비</h3>
+                            <p>천혜의 자연경관을 자랑하는 남해에서 마을의 색을 입히고 아름다운 산책로를 함께 가꿉니다.</p>
+                            <div class="activity-info">
+                                <span class="activity-duration">🗓️ 2박 3일</span>
+                                <span class="activity-benefit">🍚 삼시세끼 제공</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="activity-card reveal">
+                        <div class="activity-image"
+                            style="background-image: url('https://images.unsplash.com/photo-1511516412963-801b050c92aa?q=80&w=600');">
+                            <div class="activity-tags">
+                                <span class="tag">공간재생</span>
+                                <span class="tag">커뮤니티</span>
+                            </div>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-location">📍 제주 제주시</div>
+                            <h3>오래된 감귤 창고, 복합문화공간 재생</h3>
+                            <p>버려진 창고를 마을의 보물로 만드는 프로젝트. 인테리어 보조와 공간 기획에 참여하세요.</p>
+                            <div class="activity-info">
+                                <span class="activity-duration">🗓️ 1주일</span>
+                                <span class="activity-benefit">🚲 자전거 대여 지원</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

@@ -867,6 +867,7 @@ ul {
     z-index: 1;
   }
 }
+
 /* Problem Section */
 .problem-section {
   padding: var(--space-32) 0;
@@ -891,6 +892,12 @@ ul {
   gap: var(--space-6);
 }
 
+.problem-side .reveal-stagger {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
 .problem-side h3 {
   font-size: 1.5rem;
   margin-bottom: var(--space-4);
@@ -899,8 +906,13 @@ ul {
   gap: var(--space-2);
 }
 
-.traveler-side h3 { color: var(--primary-700); }
-.host-side h3 { color: var(--secondary-700); }
+.traveler-side h3 {
+  color: var(--primary-700);
+}
+
+.host-side h3 {
+  color: var(--secondary-700);
+}
 
 .pain-point-card {
   padding: var(--space-6);
@@ -933,4 +945,177 @@ ul {
 .pain-point-card p {
   color: var(--neutral-600);
   font-size: 0.9375rem;
+}
+/* Host Page Specific Styles */
+.host-benefits {
+  padding: var(--space-32) 0;
+  background-color: var(--secondary-50);
+}
+
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-8);
+}
+
+.benefit-card {
+  background: white;
+  padding: var(--space-8);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--secondary-100);
+  transition: all var(--transition-normal);
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary-300);
+}
+
+.benefit-card .icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-4);
+}
+
+.benefit-card h3 {
+  color: var(--secondary-700);
+  margin-bottom: var(--space-3);
+}
+
+.benefit-card p {
+  color: var(--neutral-600);
+}
+
+/* Host Process Variation */
+.host-process-section {
+  padding: var(--space-32) 0;
+  background-color: white;
+}
+
+.host-process-section .step-number {
+  background-color: var(--secondary-500);
+}
+
+.host-process-section .process-grid::after {
+  background: repeating-linear-gradient(to right, var(--secondary-200), var(--secondary-200) 10px, transparent 10px, transparent 20px);
+}
+
+/* Host CTA */
+.host-cta {
+  padding: var(--space-24) 0;
+  background-color: var(--secondary-600);
+  color: white;
+  text-align: center;
+}
+
+.host-cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-6);
+}
+
+.host-cta p {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-10);
+  opacity: 0.9;
+}
+
+.host-cta .btn-white {
+  background-color: white;
+  color: var(--secondary-700);
+}
+
+.host-cta .btn-white:hover {
+  background-color: var(--secondary-50);
+  box-shadow: 0 4px 14px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Activity Section & Cards */
+.activity-section {
+  padding: var(--space-32) 0;
+  background-color: var(--neutral-50);
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-8);
+}
+
+.activity-card {
+  background: white;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  border: 1px solid var(--neutral-100);
+}
+
+.activity-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-200);
+}
+
+.activity-image {
+  width: 100%;
+  height: 200px;
+  background-color: var(--neutral-200);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.activity-tags {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  display: flex;
+  gap: var(--space-2);
+}
+
+.tag {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: white;
+  color: var(--primary-600);
+  box-shadow: var(--shadow-sm);
+}
+
+.activity-content {
+  padding: var(--space-6);
+}
+
+.activity-location {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-bottom: var(--space-2);
+}
+
+.activity-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-3);
+  color: var(--neutral-900);
+}
+
+.activity-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--neutral-100);
+}
+
+.activity-duration {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary-600);
+}
+
+.activity-benefit {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
 }
