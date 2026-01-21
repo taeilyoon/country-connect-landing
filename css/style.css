@@ -755,29 +755,182 @@ ul {
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateX(-50%) rotate(45deg) translateY(0);
   }
+
   40% {
     transform: translateX(-50%) rotate(45deg) translateY(-10px);
   }
+
   60% {
     transform: translateX(-50%) rotate(45deg) translateY(-5px);
   }
 }
 
 /* Reveal Animations */
-.value-card, .definition-box, .background-box {
+.reveal {
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.value-card.animate-in, .definition-box.animate-in, .background-box.animate-in {
+.reveal.animate-in {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Staggered Reveal for Value Cards */
-.value-card:nth-child(2) { transition-delay: 0.2s; }
-.value-card:nth-child(3) { transition-delay: 0.4s; }
+/* Staggered Reveal */
+.reveal-stagger>*:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.reveal-stagger>*:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.reveal-stagger>*:nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+/* Process Section */
+.process-section {
+  padding: var(--space-32) 0;
+  background-color: var(--neutral-50);
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-8);
+  position: relative;
+}
+
+.process-step {
+  text-align: center;
+  position: relative;
+  padding: var(--space-8);
+  background: white;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.process-step:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-600);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin: 0 auto var(--space-4);
+  font-size: 1.25rem;
+}
+
+.process-step h3 {
+  font-size: 1.25rem;
+  color: var(--neutral-900);
+  margin-bottom: var(--space-3);
+}
+
+.process-step p {
+  color: var(--neutral-600);
+  font-size: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .process-grid::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: var(--space-20);
+    right: var(--space-20);
+    height: 2px;
+    background: repeating-linear-gradient(to right, var(--primary-200), var(--primary-200) 10px, transparent 10px, transparent 20px);
+    z-index: 0;
+  }
+
+  .process-step {
+    z-index: 1;
+  }
+}
+/* Problem Section */
+.problem-section {
+  padding: var(--space-32) 0;
+  background-color: white;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .problem-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.problem-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.problem-side h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.traveler-side h3 { color: var(--primary-700); }
+.host-side h3 { color: var(--secondary-700); }
+
+.pain-point-card {
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  border: 1px solid transparent;
+  transition: all var(--transition-normal);
+}
+
+.traveler-side .pain-point-card {
+  background-color: var(--primary-50);
+  border-color: var(--primary-100);
+}
+
+.host-side .pain-point-card {
+  background-color: var(--secondary-50);
+  border-color: var(--secondary-100);
+}
+
+.pain-point-card:hover {
+  transform: translateX(10px);
+  box-shadow: var(--shadow-md);
+}
+
+.pain-point-card h4 {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-2);
+  color: var(--neutral-900);
+}
+
+.pain-point-card p {
+  color: var(--neutral-600);
+  font-size: 0.9375rem;
+}

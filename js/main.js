@@ -273,8 +273,9 @@ class MaeulLeum {
       });
     }, observerOptions);
 
-    const animateElements = document.querySelectorAll('.value-card, .definition-box, .background-box, .track-card, .trust-card, .process-step, .stat');
-    animateElements.forEach(el => observer.observe(el));
+    // Add reveal class and observe elements
+    const elementsToReveal = document.querySelectorAll('.reveal');
+    elementsToReveal.forEach(el => observer.observe(el));
   }
 
   setupSmoothScrolling() {
