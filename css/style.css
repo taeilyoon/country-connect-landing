@@ -1210,3 +1210,24 @@ ul {
   max-height: 200px;
   opacity: 1;
 }
+/* Activity Modal Enhancements */
+.modal-subtitle {
+  margin-bottom: var(--space-6);
+  color: var(--neutral-600);
+  font-size: 1rem;
+}
+
+.modal-subtitle strong {
+  color: var(--primary-600);
+}
+
+.modal-notice {
+  font-size: 0.8125rem;
+  color: var(--neutral-500);
+  margin: var(--space-6) 0;
+  line-height: 1.4;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--neutral-50);
+  border-radius: var(--radius-lg);
+  border-left: 3px solid var(--neutral-200);
+}

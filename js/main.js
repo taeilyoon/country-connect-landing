@@ -9,6 +9,7 @@ class MaeulLeum {
     this.setupSmoothScrolling();
     this.setupFormValidation();
     this.setupFAQAccordion();
+    this.setupActivityCards();
   }
 
   setupEventListeners() {
@@ -320,6 +321,79 @@ class MaeulLeum {
         item.classList.toggle('open');
       });
     });
+  }
+
+  setupActivityCards() {
+    const activityCards = document.querySelectorAll('.activity-card');
+    activityCards.forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => {
+        const activityName = card.querySelector('h3').textContent;
+        this.handleActivityApplication(activityName);
+      });
+    });
+  }
+
+  handleActivityApplication(activityName) {
+    const modal = this.createActivityModal(activityName);
+    document.body.appendChild(modal);
+
+    requestAnimationFrame(() => {
+      modal.classList.add('active');
+    });
+
+    const closeBtn = modal.querySelector('.modal-close');
+    const submitBtn = modal.querySelector('.modal-submit');
+
+    closeBtn.addEventListener('click', () => {
+      this.closeModal(modal);
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const name = document.getElementById('modal-name').value;
+      const phone = document.getElementById('modal-phone').value;
+
+      if (name && phone) {
+        console.log('Activity application submitted:', { activityName, name, phone });
+        this.closeModal(modal);
+        this.showNotification(`'${activityName}' 활동 신청이 접수되었습니다!`, 'success');
+      } else {
+        this.showNotification('이름과 연락처를 입력해 주세요.', 'error');
+      }
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        this.closeModal(modal);
+      }
+    });
+  }
+
+  createActivityModal(activityName) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+
+    modal.innerHTML = `
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>활동 참여 신청</h2>
+        <p class="modal-subtitle">선택한 활동: <strong>${activityName}</strong></p>
+        <div class="modal-form">
+          <div class="form-group">
+            <label>이름</label>
+            <input type="text" id="modal-name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label>연락처</label>
+            <input type="tel" id="modal-phone" placeholder="010-0000-0000" required>
+          </div>
+        </div>
+        <p class="modal-notice">* 신청 주시면 마을 담당자가 24시간 이내에 연락드려 상세 일정과 준비물을 안내해 드립니다.</p>
+        <button class="btn btn-primary modal-submit">지금 바로 신청하기</button>
+      </div>
+    `;
+
+    return modal;
   }
 
   setupFormValidation() {
