@@ -1,0 +1,53 @@
+{
+  "name": "maeul-leum-landing",
+  "version": "1.0.0",
+  "description": "마을이음 - 여행이 일손이 되는 상생 플랫폼 랜딩 페이지",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8080 --directory .",
+    "build": "echo 'Build process for vanilla JS - no build step needed'",
+    "start": "python -m http.server 8080 --directory .",
+    "lint": "echo 'Linting CSS files...' && npx stylelint 'css/**/*.css'",
+    "format": "echo 'Formatting files...' && npx prettier --write '**/*.{html,css,js}'",
+    "deploy": "echo 'Ready for deployment'"
+  },
+  "keywords": [
+    "landing-page",
+    "vanilla-javascript",
+    "korean",
+    "platform",
+    "community",
+    "travel",
+    "local"
+  ],
+  "author": "Maeul-Leum Team",
+  "license": "MIT",
+  "devDependencies": {
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard": "^34.0.0",
+    "prettier": "^3.1.0"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": [
+            "layer",
+            "property",
+            "custom-selector",
+            "apply",
+            "supports"
+          ]
+        }
+      ]
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ]
+}
