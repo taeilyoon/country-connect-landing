@@ -8,6 +8,7 @@ class MaeulLeum {
     this.setupIntersectionObserver();
     this.setupSmoothScrolling();
     this.setupFormValidation();
+    this.setupFAQAccordion();
   }
 
   setupEventListeners() {
@@ -297,6 +298,27 @@ class MaeulLeum {
     window.scrollTo({
       top: targetPosition,
       behavior: 'smooth'
+    });
+  }
+
+  setupFAQAccordion() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+
+        // Close other FAQ items
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('open');
+          }
+        });
+
+        // Toggle current FAQ item
+        item.classList.toggle('open');
+      });
     });
   }
 
