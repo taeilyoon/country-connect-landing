@@ -30,7 +30,7 @@ class MaeulLeum {
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
-        
+
         if (href.startsWith('#')) {
           e.preventDefault();
           const target = document.querySelector(href);
@@ -58,7 +58,7 @@ class MaeulLeum {
 
   setupCTAButtons() {
     const ctaButtons = document.querySelectorAll('[data-user-type]');
-    
+
     ctaButtons.forEach(button => {
       button.addEventListener('click', (e) => {
         const userType = button.getAttribute('data-user-type');
@@ -70,7 +70,7 @@ class MaeulLeum {
   handleUserTypeSelection(userType) {
     const modal = this.createUserTypeModal(userType);
     document.body.appendChild(modal);
-    
+
     requestAnimationFrame(() => {
       modal.classList.add('active');
     });
@@ -96,7 +96,7 @@ class MaeulLeum {
   createUserTypeModal(userType) {
     const modal = document.createElement('div');
     modal.className = 'modal';
-    
+
     const titles = {
       traveler: '2030 여행형으로 시작하기',
       host: '50+ 호스트로 등록하기'
@@ -174,7 +174,7 @@ class MaeulLeum {
 
   handleUserTypeSubmit(userType, modal) {
     const formData = this.collectModalFormData(userType);
-    
+
     if (this.validateModalData(formData)) {
       this.submitUserRegistration(userType, formData);
       this.closeModal(modal);
@@ -186,7 +186,7 @@ class MaeulLeum {
 
   collectModalFormData(userType) {
     const data = {};
-    
+
     if (userType === 'traveler') {
       data.name = document.getElementById('modal-name').value;
       data.phone = document.getElementById('modal-phone').value;
@@ -198,7 +198,7 @@ class MaeulLeum {
       data.phone = document.getElementById('modal-phone').value;
       data.type = document.getElementById('modal-type').value;
     }
-    
+
     return data;
   }
 
@@ -273,7 +273,7 @@ class MaeulLeum {
       });
     }, observerOptions);
 
-    const animateElements = document.querySelectorAll('.track-card, .trust-card, .process-step, .stat');
+    const animateElements = document.querySelectorAll('.value-card, .definition-box, .background-box, .track-card, .trust-card, .process-step, .stat');
     animateElements.forEach(el => observer.observe(el));
   }
 
@@ -292,7 +292,7 @@ class MaeulLeum {
   scrollToSection(target) {
     const headerHeight = document.querySelector('.header').offsetHeight;
     const targetPosition = target.offsetTop - headerHeight - 20;
-    
+
     window.scrollTo({
       top: targetPosition,
       behavior: 'smooth'
@@ -312,7 +312,7 @@ class MaeulLeum {
   handleContactFormSubmit(form) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    
+
     if (this.validateContactForm(data)) {
       this.submitContactForm(data);
       this.showNotification('문의가 접수되었습니다. 빠른 시일 내에 답변드리겠습니다.', 'success');
@@ -325,12 +325,12 @@ class MaeulLeum {
   validateContactForm(data) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phonePattern = /^01[016789]-?\d{3,4}-?\d{4}$/;
-    
-    return data.name && 
-           data.email && 
-           emailPattern.test(data.email) && 
-           data.userType && 
-           data.message;
+
+    return data.name &&
+      data.email &&
+      emailPattern.test(data.email) &&
+      data.userType &&
+      data.message;
   }
 
   submitContactForm(data) {
@@ -341,13 +341,13 @@ class MaeulLeum {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
-    
+
     requestAnimationFrame(() => {
       notification.classList.add('show');
     });
-    
+
     setTimeout(() => {
       notification.classList.remove('show');
       setTimeout(() => {
@@ -442,7 +442,7 @@ class StatsCounter {
     const timer = setInterval(() => {
       currentStep++;
       counter.current = Math.min(counter.target, Math.floor(increment * currentStep));
-      
+
       if (counter.formatted.includes('%')) {
         counter.element.textContent = counter.current + '%';
       } else {
