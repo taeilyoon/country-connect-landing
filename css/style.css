@@ -279,3 +279,137 @@ ul {
   left: 0;
   right: 0;
   bottom: 0;
+
+/* Image Styles */
+.hero-image {
+  margin-top: var(--space-8);
+  text-align: center;
+}
+
+.hero-image img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+}
+
+.track-image {
+  margin-bottom: var(--space-6);
+  text-align: center;
+}
+
+.track-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: white;
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--primary-500);
+}
+
+.track-host .testimonial {
+  border-left-color: var(--secondary-500);
+}
+
+.testimonial-image {
+  flex-shrink: 0;
+}
+
+.testimonial-image img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-content {
+  flex: 1;
+}
+
+.testimonial-text {
+  font-style: italic;
+  color: var(--neutral-700);
+  margin-bottom: var(--space-2);
+}
+
+.testimonial-author {
+  font-size: 0.875rem;
+  color: var(--neutral-600);
+  text-align: right;
+}
+
+.trust-image {
+  margin-bottom: var(--space-4);
+  text-align: center;
+}
+
+.trust-image img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-image {
+  margin-bottom: var(--space-3);
+  text-align: center;
+}
+
+.stat-image img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+}
+
+.step-image {
+  margin-bottom: var(--space-4);
+  text-align: center;
+}
+
+.step-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive Images */
+@media (max-width: 767px) {
+  .hero-image img {
+    max-width: 200px;
+  }
+  
+  .testimonial {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .testimonial-author {
+    text-align: center;
+  }
+}
+
+@media (max-width: 639px) {
+  .track-image img,
+  .step-image img {
+    height: 150px;
+  }
+  
+  .trust-image img {
+    height: 120px;
+  }
+}
